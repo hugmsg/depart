@@ -1,4 +1,4 @@
-const API_URL = "TON_URL_APPS_SCRIPT";
+const API_URL = "https://script.google.com/macros/library/d/1LBlp2pcouWliPZZp1ISJjjWKQerlwvQcUJOBhLUlEXGAHlH8GUL-kP2V/1";
 
 async function fetchData() {
   try {
@@ -59,3 +59,4 @@ function displayTable(data) {
 }
 
 fetchData();
+
