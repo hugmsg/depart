@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycby0Dc1wmVo7YBNJzJqv90Yv1rvOWfH9En2aWLMlFWdxouqgyzJAKx4WrnaK9L1srZRa/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyIujwblcbvkVzh_45MHhiwgzuzIewyXMB6trZ38cIlfVOPy08n-T7uBwclMft5O4QO/exec";
 
 async function fetchData() {
   try {
@@ -55,6 +55,7 @@ function displayTable(data) {
 }
 
 fetchData();
+
 
 
 
