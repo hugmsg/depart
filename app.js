@@ -1,63 +1,61 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbzyLM3OH5HQ0yqrSCpT9uv2iZL1DjJLzMO5eUXl7uJam_IBDhZJw1om3kizz1kS05LP/exec";
-const REFRESH_INTERVAL = 60000; // 60000 ms = 60 secondes (mettre 30000 pour 30s)
-
-let refreshTimer = null;
+const REFRESH_INTERVAL = 60000;
 
 async function fetchData() {
   try {
-    const response = await fetch(API_URL + "?t=" + new Date().getTime()); 
-    // ?t= évite le cache
-
-    if (!response.ok) throw new Error("Erreur HTTP " + response.status);
+    const response = await fetch(API_URL + "?t=" + new Date().getTime());
+    if (!response.ok) throw new Error("Erreur HTTP");
 
     const data = await response.json();
-    displayTable(data);
+    displayCards(data);
     updateLastRefresh();
 
   } catch (error) {
-    document.getElementById("table-container").innerHTML =
-      `<p>Erreur de chargement : ${error.message}</p>`;
-    console.error(error);
+    document.getElementById("cards-container").innerHTML =
+      `<div class="empty">Erreur de chargement</div>`;
   }
 }
 
-function displayTable(data) {
+function displayCards(data) {
+  const container = document.getElementById("cards-container");
+  container.innerHTML = "";
+
   if (!data || data.length === 0) {
-    document.getElementById("table-container").innerHTML =
-      "<p>Aucune donnée</p>";
+    container.innerHTML = `<div class="empty">Aucun départ</div>`;
     return;
   }
 
-  const table = document.createElement("table");
-  const thead = document.createElement("thead");
-  const tbody = document.createElement("tbody");
-
-  const headers = Object.keys(data[0]);
-
-  const headerRow = document.createElement("tr");
-  headers.forEach(h => {
-    const th = document.createElement("th");
-    th.textContent = h;
-    headerRow.appendChild(th);
-  });
-  thead.appendChild(headerRow);
-
   data.forEach(row => {
-    const tr = document.createElement("tr");
-    headers.forEach(h => {
-      const td = document.createElement("td");
-      td.textContent = row[h] ?? "";
-      tr.appendChild(td);
-    });
-    tbody.appendChild(tr);
+    const card = document.createElement("div");
+    card.className = "card";
+
+    // ⚠️ adapte les noms EXACTS des colonnes de ton Sheet ici :
+    const client = row["Client"] || "";
+    const date = row["Date"] || "";
+    const chauffeur = row["Chauffeur"] || "";
+    const statut = row["Statut"] || "";
+
+    card.innerHTML = `
+      <h3>${client}</h3>
+      <div class="info">📅 ${date}</div>
+      <div class="info">👷 ${chauffeur}</div>
+      <div class="status ${getStatusClass(statut)}">${statut}</div>
+    `;
+
+    container.appendChild(card);
   });
+}
 
-  table.appendChild(thead);
-  table.appendChild(tbody);
+function getStatusClass(statut) {
+  if (!statut) return "";
 
-  const container = document.getElementById("table-container");
-  container.innerHTML = "";
-  container.appendChild(table);
+  const s = statut.toLowerCase();
+
+  if (s.includes("attente")) return "en-attente";
+  if (s.includes("valid")) return "valide";
+  if (s.includes("termin")) return "termine";
+
+  return "";
 }
 
 function updateLastRefresh() {
@@ -68,15 +66,12 @@ function updateLastRefresh() {
   });
 
   document.getElementById("last-update").textContent =
-    "Dernière mise à jour : " + timeString;
+    "Maj : " + timeString;
 }
 
 function manualRefresh() {
   fetchData();
 }
 
-// 🔄 Lancement initial
 fetchData();
-
-// 🔁 Auto-refresh
-refreshTimer = setInterval(fetchData, REFRESH_INTERVAL);
+setInterval(fetchData, REFRESH_INTERVAL);
