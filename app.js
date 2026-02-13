@@ -46,7 +46,7 @@ function displayCards(data) {
   data.forEach(row => {
 
     const client = row["Destination"] || "";
-    const date = row["Date"] || "";
+    const date = new Date(row["Date"]).toLocaleDateString("fr-FR") || "";//row["Date"] || "";
     const chauffeur = row["Chargement"] || "";
     const parti = row["Parti"] === true ? "Oui" : "Non";
 
@@ -81,4 +81,5 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
 
