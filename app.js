@@ -32,7 +32,7 @@ function displayCards(data) {
     // ⚠️ adapte les noms EXACTS des colonnes de ton Sheet ici :
     const client = row["Destination"] || "";
     const date = row["Date"] || "";
-    const chauffeur = row["Chauffeur"] || "";
+    const chauffeur = row["Chargement"] || "";
     const statut = row["Statut"] || "";
 
     card.innerHTML = `
@@ -75,6 +75,7 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
 
 
 
