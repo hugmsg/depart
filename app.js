@@ -60,11 +60,16 @@ function displayCards(data) {
     }
     
     card.innerHTML = `
+      <div class="card-left">
       <h3>${client}</h3>
       <div class="info">📅 ${date}</div>
       <div class="info">👷 ${chauffeur}</div>
+    </div>
+    <div class="card-right">
+      <div class="status ${getStatusClass(statut)}">${statut}</div>
       <div class="info">🚚 Parti : ${parti}</div>
-    `;
+    </div>
+  `;
 
     container.appendChild(card);
   });
@@ -87,6 +92,7 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
 
 
 
