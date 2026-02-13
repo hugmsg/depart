@@ -33,7 +33,7 @@ function displayCards(data) {
     const client = row["Destination"] || "";
     const date = row["Date"] || "";
     const chauffeur = row["Chargement"] || "";
-    const statut = row["Statut"] || "";
+    const statut = row["Parti"] || "";
 
     card.innerHTML = `
       <h3>${client}</h3>
@@ -51,9 +51,8 @@ function getStatusClass(statut) {
 
   const s = statut.toLowerCase();
 
-  if (s.includes("attente")) return "en-attente";
-  if (s.includes("valid")) return "valide";
-  if (s.includes("termin")) return "termine";
+  if (s.includes("false")) return "en-attente";
+  if (s.includes("true")) return "parti";
 
   return "";
 }
@@ -75,6 +74,7 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
 
 
 
