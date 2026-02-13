@@ -33,7 +33,7 @@ function displayCards(data) {
     const client = row["Destination"] || "";
     const date = row["Date"] || "";
     const chauffeur = row["Chargement"] || "";
-    const statut = row["Parti"] || "";
+    const statut = row["Statut"] || "";
 
     card.innerHTML = `
       <h3>${client}</h3>
@@ -74,6 +74,7 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
 
 
 
