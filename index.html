@@ -47,31 +47,39 @@
     }
 
     .card {
-      background: white;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-    }
+  display: flex;
+  justify-content: space-between; /* gauche / droite */
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
 
-    .card h3 {
-      margin: 0 0 8px 0;
-      font-size: 1.1rem;
-    }
+.card-left {
+  display: flex;
+  flex-direction: column;
+}
 
-    .info {
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-    }
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 
-    .status {
-      margin-top: 8px;
-      font-weight: bold;
-      padding: 6px 10px;
-      border-radius: 8px;
-      display: inline-block;
-      font-size: 0.85rem;
-    }
+.status {
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  min-width: 70px;
+  text-align: center;
+}
+
+.status.en-attente { background: #facc15; }
+.status.valide { background: #22c55e; color: white; }
+.status.termine { background: #64748b; color: white; }
 
     
 
@@ -111,6 +119,7 @@
 
 </body>
 </html>
+
 
 
 
