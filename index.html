@@ -90,6 +90,12 @@
 
 <div class="top-bar">
   <button onclick="manualRefresh()">🔄 Actualiser</button>
+  <select id="filter-select" onchange="applyFilter()">
+  <option value="all">Tous</option>
+  <option value="pending">Non partis</option>
+  <option value="done">Déjà partis</option>
+</select>
+
   <div id="last-update">--</div>
 </div>
 
@@ -107,5 +113,6 @@
 
 </body>
 </html>
+
 
 
