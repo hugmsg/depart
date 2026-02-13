@@ -45,9 +45,9 @@ function displayCards(data) {
 
   data.forEach(row => {
 
-    const client = row["Client"] || "";
+    const client = row["Destination"] || "";
     const date = row["Date"] || "";
-    const chauffeur = row["Chauffeur"] || "";
+    const chauffeur = row["Chargement"] || "";
     const parti = row["Parti"] === true ? "Oui" : "Non";
 
     const card = document.createElement("div");
@@ -72,7 +72,7 @@ function updateLastRefresh() {
   });
 
   document.getElementById("last-update").textContent =
-    "Maj : " + timeString;
+    "Dernière mise à jour : " + timeString;
 }
 
 function manualRefresh() {
@@ -81,3 +81,4 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
