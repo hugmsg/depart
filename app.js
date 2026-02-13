@@ -53,6 +53,12 @@ function displayCards(data) {
     const card = document.createElement("div");
     card.className = "card";
 
+    // Si déjà parti, griser la carte
+    if (row["Parti"] === true) {
+      card.style.opacity = "0.5"; // carte grisée
+      card.style.backgroundColor = "#e2e8f0"; // fond plus clair
+    }
+    
     card.innerHTML = `
       <h3>${client}</h3>
       <div class="info">📅 ${date}</div>
@@ -81,5 +87,6 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
 
 
