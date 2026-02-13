@@ -30,10 +30,10 @@ function displayCards(data) {
     card.className = "card";
 
     // ⚠️ adapte les noms EXACTS des colonnes de ton Sheet ici :
-    const client = row["Destination"] || "";
+    const client = row["Client"] || "";
     const date = row["Date"] || "";
-    const chauffeur = row["Chargement"] || "";
-    const statut = row["Parti"] || "";
+    const chauffeur = row["Chauffeur"] || "";
+    const statut = row["Statut"] || "";
 
     card.innerHTML = `
       <h3>${client}</h3>
@@ -75,4 +75,5 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
 
