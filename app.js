@@ -51,8 +51,8 @@ function getStatusClass(statut) {
 
   const s = statut.toLowerCase();
 
-  if (s.includes("false")) return "en-attente";
-  if (s.includes("true")) return "parti";
+  if (s.includes("FAUX")) return "en-attente";
+  if (s.includes("VRAI")) return "parti";
 
   return "";
 }
@@ -74,6 +74,7 @@ function manualRefresh() {
 
 fetchData();
 setInterval(fetchData, REFRESH_INTERVAL);
+
 
 
 
